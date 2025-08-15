@@ -147,7 +147,7 @@ docker-compose down -v
 
 ---
 
-
+```text
 
 Sua aplicação
    ↓
@@ -159,3 +159,6 @@ Prometheus acessa via scraping
    ↓
 Armazena e disponibiliza via PromQL
 ```
+### Exemplo funcional com Grafana
+
+![alt text](image.png)
