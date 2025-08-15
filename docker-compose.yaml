@@ -1,0 +1,54 @@
+version: "3.9"
+
+services:
+  opentelemetry:
+    build:
+      context: ./source/services/opentelemetry
+      dockerfile: Dockerfile
+      args:
+        REQUIREMENTS: ${REQUIREMENTS}
+    environment:
+      - LOG=${LOG}
+    ports:
+      - "5001:5000"
+    image: ${IMAGE_OTEL}
+    container_name: opentelemetry
+
+  prometheus:
+    build:
+      context: ./source/services/prometheus
+      dockerfile: Dockerfile
+      args:
+        REQUIREMENTS: ${REQUIREMENTS}
+    environment:
+      - LOG=${LOG}
+    ports:
+      - "5002:5000"
+    image: ${IMAGE_PROM}
+    container_name: prometheus
+
+  prometheus-server:
+    image: prom/prometheus
+    container_name: prometheus-server
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    depends_on:
+      - prometheus
+
+volumes:
+  grafana_data:

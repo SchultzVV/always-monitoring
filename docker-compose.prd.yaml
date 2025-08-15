@@ -1,0 +1,16 @@
+services:
+  opentelemetry:
+    build:
+      args:
+        REQUIREMENTS: requirements.txt
+    environment:
+      - LOG=False
+    image: opentelemetry
+
+  prometheus:
+    build:
+      args:
+        REQUIREMENTS: requirements.txt
+    environment:
+      - LOG=False
+    image: prometheus
