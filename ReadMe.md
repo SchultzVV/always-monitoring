@@ -108,6 +108,11 @@ docker-compose down -v
 - [Prometheus Docs](https://prometheus.io/docs/)
 
 ---
+
+- [DefineMe.md - OpenTelemetry](source/services/opentelemetry/DefineMe.md)
+- [DefineMe.md - Prometheus](source/services/prometheus/DefineMe.md)
+
+---
 ```bash
 .
 ├── Makefile
